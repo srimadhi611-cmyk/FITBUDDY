@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Plan – {{ app_name }}</title>
+  <link rel="stylesheet" href="/static/css/style.css"/>
+</head>
+<body>
+  <nav class="nav"><span class="logo">💪 {{ app_name }}</span><a href="/">Home</a></nav>
+  <div class="container">
+    <h1 style="margin:1rem 0">Your plan</h1>
+    <p><span class="badge">{{ result.goal }}</span> <span class="badge">{{ result.level }}</span></p>
+    {% if result.is_fallback %}<div class="fallback">⚠️ Demo plan. Set GEMINI_API_KEY for personalised AI plans.</div>{% endif %}
+    {% if result.safety_note %}<p style="color:var(--muted);font-size:.9rem;margin:1rem 0">{{ result.safety_note }}</p>{% endif %}
+    {% for d in result.days %}
+    <div class="card">
+      <h3>Day {{ d.day }} — {{ d.focus }} <span class="badge">{{ d.duration_minutes }} min</span></h3>
+      <ul>
+        {% for e in d.exercises %}
+        <li><strong>{{ e.name }}</strong> — {{ e.sets }}{% if e.tip %} <em>({{ e.tip }})</em>{% endif %}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endfor %}
+    {% if result.meals %}
+    <div class="card">
+      <h3>Meal ideas</h3>
+      <ul>{% for m in result.meals %}<li><strong>{{ m.when }}:</strong> {{ m.name }} — {{ m.notes }}</li>{% endfor %}</ul>
+    </div>
+    {% endif %}
+    {% if result.recovery_tips %}
+    <div class="card">
+      <h3>Recovery</h3>
+      <ul>{% for t in result.recovery_tips %}<li>{{ t }}</li>{% endfor %}</ul>
+    </div>
+    {% endif %}
+    <p style="margin:1.5rem 0"><a class="btn" href="/">← New plan</a></p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>{{ app_name }}</title>
+  <link rel="stylesheet" href="/static/css/style.css"/>
+</head>
+<body>
+  <nav class="nav"><span class="logo">💪 {{ app_name }}</span><a href="/">Home</a></nav>
+  <div class="container">
+    <div class="hero">
+      <h1>Your AI fitness plan</h1>
+      <p>Personalised workouts and meal ideas from Gemini based on your goals.</p>
+    </div>
+    <div class="card">
+      <form method="post" action="/generate-plan">
+        <label>Goal *</label>
+        <select name="goal" required>
+          <option value="lose fat">Lose fat</option>
+          <option value="build muscle">Build muscle</option>
+          <option value="general fitness">General fitness</option>
+          <option value="endurance">Endurance</option>
+        </select>
+        <label>Level</label>
+        <select name="level">
+          <option value="beginner">Beginner</option>
+          <option value="intermediate">Intermediate</option>
+          <option value="advanced">Advanced</option>
+        </select>
+        <label>Equipment</label>
+        <select name="equipment">
+          <option value="home">Home (bodyweight)</option>
+          <option value="gym">Gym</option>
+          <option value="dumbbells">Dumbbells only</option>
+        </select>
+        <label>Diet</label>
+        <select name="diet">
+          <option value="vegetarian">Vegetarian</option>
+          <option value="non-vegetarian">Non-vegetarian</option>
+          <option value="vegan">Vegan</option>
+        </select>
+        <label>Days per week</label>
+        <input type="number" name="days" value="4" min="2" max="7"/>
+        <label>Notes (injuries, preferences)</label>
+        <textarea name="notes" placeholder="e.g. no knee pain exercises"></textarea>
+        <button class="btn btn-block" type="submit">✨ Generate My Plan</button>
+      </form>
+    </div>
+  </div>
+  <footer>{{ app_name }} · Gemini · Not medical advice</footer>
+</body>
+</html>
